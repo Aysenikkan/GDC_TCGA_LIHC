@@ -4,18 +4,21 @@
 ## 📌 Proje Özeti
 Bu projede, **TCGA-LIHC (Hepatoselüler Karsinom)** somatik mutasyon verileri kullanılarak, genlerin mutasyon özelliklerine dayalı bir **gen önceliklendirme (gene prioritization)** yaklaşımı geliştirilmiştir.
 
-Amaç; çok sayıda mutasyon içeren büyük genomik veri setleri içerisinde, **kanserle ilişkili sürücü (driver) genleri** daha anlamlı biçimde öne çıkarabilecek **yorumlanabilir skorlar ve makine öğrenmesi tabanlı yöntemler** kullanmaktır.
+Çalışmanın temel amacı; büyük ölçekli genomik mutasyon verileri içerisinde yer alan ve biyolojik olarak anlamlı olan **kanserle ilişkili sürücü (driver) genleri**, rastlantısal veya gen uzunluğuna bağlı mutasyonlardan ayırt edebilecek **yorumlanabilir skorlar ve makine öğrenmesi tabanlı yöntemler** geliştirmektir.
 
-Proje; ham MAF dosyalarından başlayarak, özellik çıkarımı, skor üretimi, kümeleme (unsupervised learning) ve zayıf denetimli (weak-supervised) makine öğrenmesi adımlarını içeren **çok aşamalı bir analiz hattı** şeklinde tasarlanmıştır.
+Bu kapsamda, ham MAF dosyalarından başlanarak; gen bazlı özellik çıkarımı, öncelik skoru hesaplama, kümeleme (unsupervised learning) ve zayıf denetimli (weak-supervised) makine öğrenmesi adımlarını içeren **uçtan uca, çok aşamalı bir analiz hattı** tasarlanmış ve uygulanmıştır.
+
+Geliştirilen yöntemler, yalnızca mutasyon sıklığını değil; mutasyonların fonksiyonel etkisini, hasta yaygınlığını ve klinik sonuçlarla (yaşam ve nüks) ilişkisini de dikkate alarak, **klinik olarak anlamlı genleri daha tutarlı biçimde öne çıkarmayı** hedeflemektedir.
 
 ---
 
 ## 🎯 Projenin Amacı
-- TCGA-LIHC somatik mutasyon verilerini analiz etmek  
-- Gen bazlı mutasyon özellikleri çıkarmak  
-- Mutasyon sıklığı, etki şiddeti ve hasta yaygınlığına dayalı **gen öncelik skoru** geliştirmek  
-- Benzer mutasyon profiline sahip genleri **kümelemek**  
-- Bilinen driver genlerden yararlanarak **driver-benzeri genleri** makine öğrenmesi ile tahmin etmek  
+- TCGA-LIHC somatik mutasyon verilerini sistematik ve yeniden üretilebilir bir biçimde analiz etmek  
+- Gen bazında mutasyon sıklığı, etki düzeyi ve hasta yaygınlığı gibi anlamlı özellikler çıkarmak  
+- Bu özelliklere dayalı **yorumlanabilir bir gen öncelik skoru (Gene Priority Score)** geliştirmek  
+- Benzer mutasyon profiline sahip genleri **kümeleme algoritmaları** kullanarak gruplamak  
+- Bilinen driver genlerden yararlanarak, **driver-benzeri genleri** makine öğrenmesi yaklaşımları ile tahmin etmek  
+- Elde edilen gen önceliklendirme sonuçlarını **klinik sonuçlar (OS ve DFS/PFS)** ile ilişkilendirmek  
 
 ---
 
@@ -23,13 +26,15 @@ Proje; ham MAF dosyalarından başlayarak, özellik çıkarımı, skor üretimi,
 - **Kaynak:** TCGA (The Cancer Genome Atlas)  
 - **Kanser Türü:** Liver Hepatocellular Carcinoma (LIHC)  
 - **Veri Türü:** Somatic Mutation (MAF)  
-- **Hasta Sayısı:** 414  
-- **Toplam Mutasyon:** ~48.000  
-- **Toplam Gen:** ~14.600  
+- **Toplam Hasta Sayısı:** 414  
+- **Toplam Mutasyon Sayısı:** ~48.000  
+- **Analiz Edilen Gen Sayısı:** ~14.600  
+
+Bu veri seti, hem geniş hasta sayısı hem de zengin mutasyon içeriği sayesinde, gen önceliklendirme ve klinik ilişkilendirme analizleri için güçlü bir temel sunmaktadır.
 
 ---
 
-## 🔬 Metodoloji (Adım Adım)
+## 🔬 Metodoloji
 
 ### 🔹 Adım 1 — MAF Dosyalarının Birleştirilmesi
 TCGA-LIHC için indirilen çok sayıda `.maf.gz` dosyası tek bir tablo altında birleştirilmiştir.
@@ -52,7 +57,7 @@ Birleştirilen MAF dosyasından gen seviyesinde özet özellikler üretilmiştir
 
 ---
 
-### 🔹 Adım 2 (Devam) — Gen Öncelik Skoru
+### 🔹 Adım 2 — Gen Öncelik Skoru
 Genlerin mutasyon profillerine dayalı **ağırlıklı bir skor** hesaplanmıştır:
 
 - Hasta yaygınlığı (en yüksek ağırlık)  
@@ -138,21 +143,65 @@ Dosya yolları:
 ![Precision-Recall Eğrisi](outputs/step3d_pr_curve.png)
 
 ---
+## ❤️ Step 4 – Klinik Sonuçlar ile Gen Mutasyonlarının İlişkisi
 
-## 📁 Depo (Repository) Yapısı
+Bu adımda her gen için:
 
-```text
-GDC_TCGA_LIHC/
-│
-├─ data/
-├─ outputs/
-├─ step1_merge_maf.py
-├─ step2_gene_priority_score.py
-├─ step3A_validate_and_report.py
-├─ step3B_clustering.py
-├─ step3C_cluster_interpretation.py
-├─ step3D_ml_driver_like_score.py
-└─ README.md
+- **Mutasyonu olan hastalar**
+- **Mutasyonu olmayan hastalar**
+
+karşılaştırılmıştır.
+
+### 📊 Kullanılan Yöntemler
+- Kaplan–Meier sağkalım eğrileri
+- Log-rank testi
+- Cox Proportional Hazards modeli
+
+---
+
+## 🧩 Step 4B – Gen Bazlı Survival & Nüks Analizi
+
+### 🔴 Overall Survival (OS)
+- **ARID1A mutasyonu**, yaşam süresini anlamlı şekilde kısaltmaktadır  
+  *(HR ≈ 2.0, p < 0.05)*
+
+### 🔴 DFS / PFS (Nüks – Progresyon)
+- **TP53 mutasyonu**, nüks/progresyon riskini artırmaktadır  
+  *(HR ≈ 1.5, p < 0.05)*
+
+Bu bulgular literatür ile yüksek düzeyde uyumludur.
+
+---
+
+## 🌍 Step 4C – Büyük Resim (Big Picture) Görselleştirmeleri
+
+Aşağıdaki grafikler, gen mutasyonlarının **etki yönünü ve klinik önemini** özetlemektedir.
+
+### 📈 OS Volcano Plot
+Mutasyon etkisi (log2 HR) ile istatistiksel anlamlılık (-log10 p) ilişkisi:
+
+![OS Volcano](outputs/step4c_big_picture/bigpic_os_volcano.png)
+
+---
+
+### 📈 DFS/PFS Volcano Plot
+
+![DFS Volcano](outputs/step4c_big_picture/bigpic_dfs_volcano.png)
+
+---
+
+### 🧬 OS vs DFS Karşılaştırması
+Aynı genin OS ve DFS üzerindeki etkisinin karşılaştırılması:
+
+![OS vs DFS](outputs/step4c_big_picture/bigpic_os_vs_dfs_log2hr_scatter.png)
+
+---
+
+### 🧭 Mutasyon Etki Yön Matrisi
+- **Pozitif (kırmızı):** Risk artırıcı  
+- **Negatif (mavi):** Koruyucu etki
+
+![Direction Matrix](outputs/step4c_big_picture/bigpic_direction_matrix_log2hr.png)
 
 ## 📌 Bulgular
 
