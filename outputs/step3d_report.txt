@@ -1,0 +1,57 @@
+STEP 3D REPORT - Weak-supervised ML driver-like scoring
+======================================================
+
+Input file: D:\ALSU\GDC_TCGA_LIHC\outputs\gene_priority_score.csv
+Best model: LogReg
+AUC: 0.988992639040349
+AP : 0.19864542391914655
+
+Weak labels -> Positive(driver): 15, Negative: 14670
+Features used: ['patient_frequency', 'high_impact_ratio', 'log_n_mutations', 'n_patients', 'hotspot_ratio']
+
+Top 20 genes by ML probability:
+--------------------------------
+Hugo_Symbol  ml_driver_probability  hybrid_score  patient_frequency  high_impact_ratio  hotspot_ratio
+        TTN               1.000000      0.807101           0.301932           0.059172            0.0
+       TP53               1.000000      0.817592           0.265700           0.348214            0.0
+     CTNNB1               1.000000      0.753226           0.231884           0.000000            0.0
+      MUC16               1.000000      0.741277           0.195652           0.102041            0.0
+       PCLO               0.999989      0.701208           0.132850           0.117647            0.0
+        ALB               0.999967      0.752238           0.125604           0.583333            0.0
+      OBSCN               0.999932      0.677068           0.111111           0.037736            0.0
+       RYR2               0.999888      0.679083           0.106280           0.081633            0.0
+      CSMD3               0.999852      0.682972           0.103865           0.127660            0.0
+      LRP1B               0.999801      0.682373           0.101449           0.136364            0.0
+        FLG               0.999757      0.670757           0.096618           0.066667            0.0
+      XIRP2               0.999644      0.665045           0.091787           0.046512            0.0
+      HMCN1               0.999474      0.680681           0.086957           0.204545            0.0
+       APOB               0.999297      0.709950           0.089372           0.435897            0.0
+     ABCA13               0.999294      0.663646           0.084541           0.076923            0.0
+     ARID1A               0.999285      0.743248           0.091787           0.700000            0.0
+      MUC5B               0.999210      0.664095           0.084541           0.081081            0.0
+      USH2A               0.999150      0.659032           0.082126           0.052632            0.0
+      CSMD1               0.998942      0.666768           0.079710           0.131579            0.0
+    CACNA1E               0.998851      0.654352           0.079710           0.028571            0.0
+
+Known driver mini-list ranks (gene, rank, prob):
+-----------------------------------------------
+- ACVR2A     rank= 201  prob=0.8852
+- ALB        rank=   6  prob=1.0000
+- APOB       rank=  14  prob=0.9993
+- ARID1A     rank=  16  prob=0.9993
+- AXIN1      rank=  40  prob=0.9934
+- BAP1       rank=  34  prob=0.9951
+- CDKN2A     rank= 365  prob=0.7610
+- CTNNB1     rank=   3  prob=1.0000
+- KEAP1      rank= 113  prob=0.9473
+- NFE2L2     rank= 585  prob=0.6326
+- PIK3CA     rank= 115  prob=0.9472
+- RB1        rank=  98  prob=0.9600
+- RPS6KA3    rank=  88  prob=0.9680
+- TERT       rank=3097  prob=0.1417
+- TP53       rank=   2  prob=1.0000
+
+Notes:
+- This is weak-supervised learning (not true ground truth).
+- Next improvement: use external curated driver lists (IntOGen, COSMIC Cancer Gene Census, OncoKB) as labels.
+- Or do pan-cancer training then test on LIHC.

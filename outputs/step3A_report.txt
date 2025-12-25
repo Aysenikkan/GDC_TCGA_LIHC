@@ -1,0 +1,39 @@
+STEP 3A REPORT - LIHC Gene Priority Score
+========================================
+
+Total genes: 14685
+Top gene: TP53  (score=0.5440)
+
+Top 10 genes by score:
+01. TP53       score=0.5440  patient_freq=0.2657  high_impact=0.3482  hotspot=0.0000
+02. TTN        score=0.5178  patient_freq=0.3019  high_impact=0.0592  hotspot=0.0000
+03. CTNNB1     score=0.3831  patient_freq=0.2319  high_impact=0.0000  hotspot=0.0000
+04. ALB        score=0.3806  patient_freq=0.1256  high_impact=0.5833  hotspot=0.0000
+05. ARID1A     score=0.3592  patient_freq=0.0918  high_impact=0.7000  hotspot=0.0000
+06. AXIN1      score=0.3589  patient_freq=0.0676  high_impact=0.8333  hotspot=0.0000
+07. MUC16      score=0.3532  patient_freq=0.1957  high_impact=0.1020  hotspot=0.0000
+08. UBE2D3     score=0.3121  patient_freq=0.0097  high_impact=1.0000  hotspot=0.0000
+09. PHKG2      score=0.3121  patient_freq=0.0097  high_impact=1.0000  hotspot=0.0000
+10. GADL1      score=0.3121  patient_freq=0.0097  high_impact=1.0000  hotspot=0.0000
+
+Known driver mini-list hits (gene, rank):
+- TP53  rank=1  score=0.5440
+- CTNNB1  rank=3  score=0.3831
+- ALB  rank=4  score=0.3806
+- ARID1A  rank=5  score=0.3592
+- AXIN1  rank=6  score=0.3589
+- APOB  rank=804  score=0.2759
+- BAP1  rank=806  score=0.2734
+- RB1  rank=807  score=0.2635
+- ACVR2A  rank=1004  score=0.2065
+- RPS6KA3  rank=1006  score=0.2052
+- CDKN2A  rank=2229  score=0.1444
+- KEAP1  rank=2231  score=0.1435
+- PIK3CA  rank=5127  score=0.0645
+- NFE2L2  rank=5169  score=0.0623
+- TERT  rank=6466  score=0.0121
+
+Interpretation notes:
+- If known drivers appear in top ranks, score is biologically plausible.
+- If very large genes (e.g., TTN) appear too high, there may be gene-length bias.
+- Next: STEP 3B will cluster genes using mutation features (unsupervised ML).

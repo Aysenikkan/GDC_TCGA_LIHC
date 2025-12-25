@@ -1,0 +1,77 @@
+STEP 3B - KMeans Clustering (Genes)
+=================================
+
+k range: 2-12
+Elbow(knee) suggested k: 6
+Final chosen k (elbow-window + best silhouette): 6
+
+Silhouette scores:
+- k= 2  silhouette=0.5293
+- k= 3  silhouette=0.6068
+- k= 4  silhouette=0.6136
+- k= 5  silhouette=0.6039
+- k= 6  silhouette=0.6588
+- k= 7  silhouette=0.6374
+- k= 8  silhouette=0.6300
+- k= 9  silhouette=0.6414
+- k=10  silhouette=0.6457
+- k=11  silhouette=0.6361
+- k=12  silhouette=0.6537
+
+Inertias:
+- k= 2  inertia=49450.74
+- k= 3  inertia=31820.02
+- k= 4  inertia=22532.05
+- k= 5  inertia=15574.81
+- k= 6  inertia=10720.91
+- k= 7  inertia=7871.99
+- k= 8  inertia=6252.91
+- k= 9  inertia=5133.87
+- k=10  inertia=4312.71
+- k=11  inertia=3739.85
+- k=12  inertia=3341.85
+
+Cluster counts:
+- cluster 0: 821 genes
+- cluster 1: 8477 genes
+- cluster 2: 222 genes
+- cluster 3: 2493 genes
+- cluster 4: 2668 genes
+- cluster 5: 4 genes
+
+Cluster means (feature averages):
+         n_mutations  n_patients  high_impact_ratio  patient_frequency  gene_priority_score  hotspot_ratio
+cluster                                                                                                   
+0           1.271620    1.253350           0.991900           0.003027             0.298592            0.0
+1           1.915182    1.892415           0.000000           0.004571             0.003598            0.0
+2          21.126126   19.675676           0.152425           0.047526             0.121033            0.0
+3           7.223426    7.004813           0.125748           0.016920             0.061937            0.0
+4           3.125937    3.046477           0.411957           0.007359             0.131839            0.0
+5         119.000000  103.000000           0.127357           0.248792             0.449497            0.0
+
+
+EXTRA OUTPUTS
+=============
+Top20 with clusters: D:\ALSU\GDC_TCGA_LIHC\outputs\step3b_top20_with_clusters.csv
+Cluster sizes plot:  D:\ALSU\GDC_TCGA_LIHC\outputs\step3b_cluster_sizes.png
+PCA plot:            D:\ALSU\GDC_TCGA_LIHC\outputs\step3b_pca_clusters.png
+
+Cluster summary (MEAN):
+         n_mutations  n_patients  high_impact_ratio  patient_frequency  gene_priority_score  hotspot_ratio
+cluster                                                                                                   
+0           1.271620    1.253350           0.991900           0.003027             0.298592            0.0
+1           1.915182    1.892415           0.000000           0.004571             0.003598            0.0
+2          21.126126   19.675676           0.152425           0.047526             0.121033            0.0
+3           7.223426    7.004813           0.125748           0.016920             0.061937            0.0
+4           3.125937    3.046477           0.411957           0.007359             0.131839            0.0
+5         119.000000  103.000000           0.127357           0.248792             0.449497            0.0
+
+Cluster summary (MEDIAN):
+         n_mutations  n_patients  high_impact_ratio  patient_frequency  gene_priority_score  hotspot_ratio
+cluster                                                                                                   
+0                1.0         1.0           1.000000           0.002415             0.300000            0.0
+1                2.0         2.0           0.000000           0.004831             0.004032            0.0
+2               18.0        17.0           0.125000           0.041063             0.112702            0.0
+3                7.0         6.0           0.125000           0.014493             0.066290            0.0
+4                3.0         3.0           0.400000           0.007246             0.136129            0.0
+5              105.0       103.0           0.080606           0.248792             0.450408            0.0
